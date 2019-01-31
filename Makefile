@@ -3,8 +3,10 @@ CPPFLAGS     =
 LDFLAGS      =
 LIBS         = -lm
 
-DESTDIR = ./
+DESTDIR = ./bin/
 TARGET  = main
+
+$(shell if not exist "bin" mkdir bin)
 
 OBJECTS := $(patsubst %.cpp,%.o,$(wildcard *.cpp))
 
@@ -17,7 +19,7 @@ $(OBJECTS): %.o: %.cpp
 	$(SYSCONF_LINK) -Wall $(CPPFLAGS) -c $(CFLAGS) $< -o $@
 
 clean:
-	-rm -f $(OBJECTS)
-	-rm -f $(TARGET)
-	-rm -f *.tga
+	-rm *.o $(objects) mp1
+	rm -f $(TARGET)
+	rm -f *.tga
 
