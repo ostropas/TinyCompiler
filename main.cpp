@@ -1,13 +1,21 @@
-#include "tgaimage.h"
+// Compiler modules
+// Other includes
+#include <stdio.h>
 
-const TGAColor white = TGAColor(255, 255, 255, 255);
-const TGAColor red   = TGAColor(255, 0,   0,   255);
+#include "Lexer/Lexer.h"
 
 int main(int argc, char** argv) {
-	TGAImage image(100, 100, TGAImage::RGB);
-	image.set(52, 41, red);
-	image.flip_vertically(); // i want to have the origin at the left bottom corner of the image
-	image.write_tga_file("output.tga");
+	if (argc < 2) {
+		printf("No input msg\n");
+		return -1;
+	}
+
+	Lexer lexer = Lexer();
+	lexer.bar("wow");
+
+	printf(lexer.bar().c_str());
+
+
 	return 0;
 }
 
