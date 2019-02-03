@@ -6,8 +6,6 @@ LIBS         =
 DESTDIR = ./bin/
 TARGET  = main
 
-$(shell if not exist "bin" mkdir bin)
-
 dirs := . Lexer Parcer MachineCode Compiler
 OBJECTS := $(foreach dir,$(dirs),$(patsubst $(dir)/%.cpp,$(dir)/%.o,$(wildcard $(dir)/*.cpp)))
 
