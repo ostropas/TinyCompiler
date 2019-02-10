@@ -1,3 +1,1 @@
-Test text for example
-Loool
-Keke
+{ a = 1; b = 2; c = a + b; }
