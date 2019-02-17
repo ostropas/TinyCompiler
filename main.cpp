@@ -16,6 +16,7 @@ int main(int argc, char** argv)
         printf("No input file\n");
         return -1;
     }
+    // TODO: test
 
     ifstream inFile;
     inFile.open(argv[1]);
@@ -25,8 +26,8 @@ int main(int argc, char** argv)
         exit(1);
     }
 
-    string tmp;
-    vector<string> words = {};
+    char tmp;
+    vector<char> words = {};
 
     while (inFile >> tmp) {
         words.emplace_back(tmp);
@@ -35,12 +36,7 @@ int main(int argc, char** argv)
     inFile.close();
 
     Lexer lexer = Lexer(&words);
-    // lexer.Error("kek");
-
-    for (int i = 0; i < words.size(); i++) {
-        cout << words[i];
-    }
-    // cout << lexer.bar().c_str() << '\n';
+    vector<TokenStruct> tokens = lexer.tokenize();
 
     return 0;
 }

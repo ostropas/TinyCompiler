@@ -33,4 +33,9 @@
       <Filter>Файлы заголовков\Lexer</Filter>
     </ClInclude>
   </ItemGroup>
+  <ItemGroup>
+    <Text Include="test.txt">
+      <Filter>Файлы ресурсов</Filter>
+    </Text>
+  </ItemGroup>
 </Project>

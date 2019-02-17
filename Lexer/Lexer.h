@@ -1,3 +1,4 @@
+#include <algorithm>
 #include <iostream>
 #include <map>
 #include <string>
@@ -23,10 +24,14 @@ enum LexTypes {
     SEMICOLON
 };
 
-struct CharStruct {
+struct TokenStruct {
     LexTypes type;
-    char ch;
     string value;
+    TokenStruct(LexTypes type, string value)
+    {
+        this->type = type;
+        this->value = value;
+    }
 };
 
 class Lexer {
@@ -48,16 +53,13 @@ private:
             { "do", DO },
             { "while", WHILE } };
 
-    std::vector<std::string>* _words;
+    std::vector<char>* _words;
 
 public:
-    void Error(const string& msg);
-
-    Lexer(const std::vector<std::string>* words);
+    Lexer(const std::vector<char>* words);
     ~Lexer() {};
 
-    void EmptyWords();
+    void Error(const string& msg);
 
-    // const std::string& bar() const { return _bar; }
-    // void bar(const std::string& bar) { _bar = bar; }
+    vector<TokenStruct> tokenize();
 };
