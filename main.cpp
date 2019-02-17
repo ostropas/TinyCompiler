@@ -1,5 +1,3 @@
-// Compiler modules
-// Other includes
 #include <fstream>
 #include <iostream>
 #include <stdio.h>

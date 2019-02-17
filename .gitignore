@@ -2,3 +2,16 @@
 *.code-workspace
 bin
 .vscode
+
+# vs studio
+# User-specific files
+*.rsuser
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+x64/
+x86/
+
+.vs/
