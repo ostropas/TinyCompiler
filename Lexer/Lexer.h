@@ -5,8 +5,7 @@
 
 using namespace std;
 
-enum LexTypes
-{
+enum LexTypes {
     NUM,
     ID,
     IF,
@@ -24,40 +23,38 @@ enum LexTypes
     SEMICOLON
 };
 
-struct CharStruct
-{
+struct CharStruct {
     LexTypes type;
     char ch;
     string value;
 };
 
-class Lexer
-{
-  private:
+class Lexer {
+private:
     map<char, LexTypes>
-        _SYMBOLS = {{'{', LBRA},
-                    {'}', RBRA},
-                    {'=', EQUAL},
-                    {';', SEMICOLON},
-                    {'(', LPAR},
-                    {')', RPAR},
-                    {'+', PLUS},
-                    {'-', MINUS},
-                    {'<', LESS}};
+        _SYMBOLS = { { '{', LBRA },
+            { '}', RBRA },
+            { '=', EQUAL },
+            { ';', SEMICOLON },
+            { '(', LPAR },
+            { ')', RPAR },
+            { '+', PLUS },
+            { '-', MINUS },
+            { '<', LESS } };
 
     map<string, LexTypes>
-        _WORDS = {{"if", IF},
-                  {"else", ELSE},
-                  {"do", DO},
-                  {"while", WHILE}};
+        _WORDS = { { "if", IF },
+            { "else", ELSE },
+            { "do", DO },
+            { "while", WHILE } };
 
-    std::vector<std::string> *_words;
+    std::vector<std::string>* _words;
 
-  public:
-    void Error(string msg);
+public:
+    void Error(const string& msg);
 
-    Lexer(const std::vector<std::string> *words);
-    ~Lexer(){};
+    Lexer(const std::vector<std::string>* words);
+    ~Lexer() {};
 
     void EmptyWords();
 
