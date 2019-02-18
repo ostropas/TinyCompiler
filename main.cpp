@@ -5,8 +5,7 @@
 #include <vector>
 
 #include "Lexer/Lexer.h"
-
-// #include "CharStruct.h"
+#include "Parser/Parser.h"
 
 using namespace std;
 
@@ -37,6 +36,8 @@ int main(int argc, char** argv)
 
     Lexer lexer = Lexer(&words);
     vector<TokenStruct> tokens = lexer.tokenize();
+
+    Parser parser = Parser();
 
     return 0;
 }

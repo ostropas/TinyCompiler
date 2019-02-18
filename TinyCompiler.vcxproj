@@ -152,9 +152,11 @@
   <ItemGroup>
     <ClCompile Include="Lexer\Lexer.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Parser\Parser.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Lexer\Lexer.h" />
+    <ClInclude Include="Parser\Parser.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="test.txt" />

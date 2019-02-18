@@ -19,6 +19,12 @@
     <Filter Include="Файлы заголовков\Lexer">
       <UniqueIdentifier>{351ff053-5e6a-4cc4-8728-f07b18f0a637}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Исходные файлы\Parser">
+      <UniqueIdentifier>{4e46112a-69f5-496b-b8ad-ebbf95de8362}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Файлы заголовков\Parser">
+      <UniqueIdentifier>{fe6356ef-3062-4805-a317-44c09028d53b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -27,10 +33,16 @@
     <ClCompile Include="Lexer\Lexer.cpp">
       <Filter>Исходные файлы\Lexer</Filter>
     </ClCompile>
+    <ClCompile Include="Parser\Parser.cpp">
+      <Filter>Исходные файлы\Parser</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Lexer\Lexer.h">
       <Filter>Файлы заголовков\Lexer</Filter>
+    </ClInclude>
+    <ClInclude Include="Parser\Parser.h">
+      <Filter>Файлы заголовков\Parser</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

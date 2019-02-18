@@ -1,4 +1,5 @@
-#include <algorithm>
+#ifndef LEXER_H
+#define LEXER_H
 #include <iostream>
 #include <map>
 #include <string>
@@ -55,11 +56,12 @@ private:
 
     std::vector<char>* _words;
 
+    void Error(const string& msg);
+
 public:
     Lexer(const std::vector<char>* words);
     ~Lexer() {};
 
-    void Error(const string& msg);
-
     vector<TokenStruct> tokenize();
 };
+#endif // !LEXER_H
