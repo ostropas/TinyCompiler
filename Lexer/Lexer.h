@@ -26,8 +26,8 @@ enum LexTypes {
 
 struct TokenStruct {
     LexTypes type;
-    string value;
-    TokenStruct(LexTypes type, string value)
+    int value;
+    TokenStruct(LexTypes type, int value)
     {
         this->type = type;
         this->value = value;
