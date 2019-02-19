@@ -1,9 +1,19 @@
 #include "Lexer.h"
 
-Lexer::Lexer(const std::vector<char>* words)
-{
-    _words = const_cast<std::vector<char>*>(words);
-}
+const map<char, LexTypes> Lexer::_SYMBOLS = { { '{', LexTypes::LBRA },
+    { '}', LexTypes::RBRA },
+    { '=', LexTypes::EQUAL },
+    { ';', LexTypes::SEMICOLON },
+    { '(', LexTypes::LPAR },
+    { ')', LexTypes::RPAR },
+    { '+', LexTypes::PLUS },
+    { '-', LexTypes::MINUS },
+    { '<', LexTypes::LESS } };
+
+const map<string, LexTypes> Lexer::_WORDS = { { "if", LexTypes::IF },
+    { "else", LexTypes::ELSE },
+    { "do", LexTypes::DO },
+    { "while", LexTypes::WHILE } };
 
 void Lexer::Error(const string& msg)
 {
@@ -11,13 +21,13 @@ void Lexer::Error(const string& msg)
     exit(-1);
 }
 
-vector<TokenStruct> Lexer::tokenize()
+vector<TokenStruct> Lexer::tokenize(const std::vector<char>& words)
 {
     uint64_t index = 0;
     vector<TokenStruct> tokens = vector<TokenStruct>();
 
-    while (index < _words->size()) {
-        char currentChar = _words->at(index);
+    while (index < words.size()) {
+        char currentChar = words.at(index);
         if (_SYMBOLS.find(currentChar) != _SYMBOLS.end()) {
             tokens.emplace_back(TokenStruct(_SYMBOLS.at(currentChar), -1));
             index++;
@@ -25,15 +35,19 @@ vector<TokenStruct> Lexer::tokenize()
             int intVal = 0;
             while (isdigit(currentChar)) {
                 intVal = intVal * 10 + (static_cast<int>(currentChar) - 48);
-                currentChar = _words->at(++index);
+                currentChar = words.at(++index);
             }
 
             tokens.emplace_back(TokenStruct(LexTypes::NUM, intVal));
         } else if (isalpha(currentChar)) {
             string ident = "";
             while (isalpha(currentChar)) {
-                ident = currentChar;
-                currentChar = _words->at(++index);
+                ident += currentChar;
+                if (index == words.size() - 1) {
+                    ++index;
+                    break;
+                }
+                currentChar = words.at(++index);
             }
 
             if (_WORDS.find(ident) != _WORDS.end()) {

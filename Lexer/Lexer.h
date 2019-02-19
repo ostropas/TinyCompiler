@@ -1,5 +1,4 @@
-#ifndef LEXER_H
-#define LEXER_H
+#pragma once
 #include <iostream>
 #include <map>
 #include <string>
@@ -37,31 +36,29 @@ struct TokenStruct {
 
 class Lexer {
 private:
-    map<char, LexTypes>
-        _SYMBOLS = { { '{', LexTypes::LBRA },
-            { '}', LexTypes::RBRA },
-            { '=', LexTypes::EQUAL },
-            { ';', LexTypes::SEMICOLON },
-            { '(', LexTypes::LPAR },
-            { ')', LexTypes::RPAR },
-            { '+', LexTypes::PLUS },
-            { '-', LexTypes::MINUS },
-            { '<', LexTypes::LESS } };
+    /// <summary>
+    /// All posible lexer symbols
+    /// </summary>
+    static const map<char, LexTypes> _SYMBOLS;
+    /// <summary>
+    /// All keywords
+    /// </summary>
+    static const map<string, LexTypes> _WORDS;
 
-    map<string, LexTypes>
-        _WORDS = { { "if", LexTypes::IF },
-            { "else", LexTypes::ELSE },
-            { "do", LexTypes::DO },
-            { "while", LexTypes::WHILE } };
-
-    std::vector<char>* _words;
-
-    void Error(const string& msg);
+    /// <summary>
+    /// Print error
+    /// </summary>
+    /// <param name="msg"></param>
+    static void Error(const string& msg);
 
 public:
-    Lexer(const std::vector<char>* words);
+    Lexer() {};
     ~Lexer() {};
 
-    vector<TokenStruct> tokenize();
+    /// <summary>
+    /// Create token from text
+    /// </summary>
+    /// <param name="words">input text</param>
+    /// <returns>tokens</returns>
+    static vector<TokenStruct> tokenize(const std::vector<char>& words);
 };
-#endif // !LEXER_H
