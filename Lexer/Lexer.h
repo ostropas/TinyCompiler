@@ -7,7 +7,7 @@
 
 using namespace std;
 
-enum LexTypes {
+enum class LexTypes {
     NUM,
     ID,
     IF,
@@ -38,21 +38,21 @@ struct TokenStruct {
 class Lexer {
 private:
     map<char, LexTypes>
-        _SYMBOLS = { { '{', LBRA },
-            { '}', RBRA },
-            { '=', EQUAL },
-            { ';', SEMICOLON },
-            { '(', LPAR },
-            { ')', RPAR },
-            { '+', PLUS },
-            { '-', MINUS },
-            { '<', LESS } };
+        _SYMBOLS = { { '{', LexTypes::LBRA },
+            { '}', LexTypes::RBRA },
+            { '=', LexTypes::EQUAL },
+            { ';', LexTypes::SEMICOLON },
+            { '(', LexTypes::LPAR },
+            { ')', LexTypes::RPAR },
+            { '+', LexTypes::PLUS },
+            { '-', LexTypes::MINUS },
+            { '<', LexTypes::LESS } };
 
     map<string, LexTypes>
-        _WORDS = { { "if", IF },
-            { "else", ELSE },
-            { "do", DO },
-            { "while", WHILE } };
+        _WORDS = { { "if", LexTypes::IF },
+            { "else", LexTypes::ELSE },
+            { "do", LexTypes::DO },
+            { "while", LexTypes::WHILE } };
 
     std::vector<char>* _words;
 

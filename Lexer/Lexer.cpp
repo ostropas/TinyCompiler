@@ -28,7 +28,7 @@ vector<TokenStruct> Lexer::tokenize()
                 currentChar = _words->at(++index);
             }
 
-            tokens.emplace_back(TokenStruct(NUM, intVal));
+            tokens.emplace_back(TokenStruct(LexTypes::NUM, intVal));
         } else if (isalpha(currentChar)) {
             string ident = "";
             while (isalpha(currentChar)) {
@@ -39,7 +39,7 @@ vector<TokenStruct> Lexer::tokenize()
             if (_WORDS.find(ident) != _WORDS.end()) {
                 tokens.emplace_back(TokenStruct(_WORDS.at(ident), -1));
             } else if (ident.size() == 1) {
-                tokens.emplace_back(TokenStruct(ID, static_cast<int>(ident.at(0) - 'a')));
+                tokens.emplace_back(TokenStruct(LexTypes::ID, static_cast<int>(ident.at(0) - 'a')));
             } else {
                 Error("Unknown identifier: " + ident);
             }

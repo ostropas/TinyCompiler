@@ -9,7 +9,7 @@
 using namespace std;
 
 namespace parser {
-enum ParserKind {
+enum class ParserKind {
     VAR,
     CONST,
     ADD,
