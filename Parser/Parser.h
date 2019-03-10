@@ -1,5 +1,4 @@
-#ifndef PARSER_H
-#define PARSER_H
+#pragma once
 #include "../Lexer/Lexer.h"
 #include <functional>
 #include <iostream>
@@ -9,56 +8,76 @@
 
 using namespace std;
 
-//namespace parser {
-//enum class ParserKind {
-//    VAR,
-//    CONST,
-//    ADD,
-//    SUB,
-//    LT,
-//    SET,
-//    IF1,
-//    IF2,
-//    WHILE,
-//    DO,
-//    EMPTY,
-//    SEQ,
-//    EXPR,
-//    PROG
-//};
-//}
-//
-//class Node {
-//    parser::ParserKind kind;
-//    int value;
-//    function<int()> op1;
-//    function<int()> op2;
-//    function<int()> op3;
-//
-//public:
-//    Node(parser::ParserKind kind, int value = NULL, function<int()> op1 = NULL, function<int()> op2 = NULL, function<int()> op3 = NULL)
-//    {
-//
-//        this->kind = kind;
-//        this->value = value;
-//        this->op1 = op1;
-//        this->op2 = op2;
-//        this->op3 = op3;
-//    }
-//};
-//
-//class Parser {
-//public:
-//    Parser() {};
-//    ~Parser() {};
-//
-//    static vector<Node> Parse(vector<TokenStruct> tokens);
-//
-//private:
-//    static int _Statement();
-//    static size_t _CurrentIndex;
-//
-//private:
-//    void Error(const string& msg);
-//};
-#endif // !PARSER_H
+/// <summary>
+/// All possible parser kinds
+/// </summary>
+enum class ParserKind {
+    VAR,
+    CONST,
+    ADD,
+    SUB,
+    LT,
+    SET,
+    IF1,
+    IF2,
+    WHILE,
+    DO,
+    EMPTY,
+    SEQ,
+    EXPR,
+    PROG
+};
+
+/// <summary>
+/// Parser struct in tree, Node is realisation of tree
+/// </summary>
+class Node {
+public:
+    ParserKind kind;
+    int value;
+    // Next tree leafs
+    Node* op1;
+    Node* op2;
+    Node* op3;
+
+    Node() {};
+    Node(ParserKind kind, int value = NULL, Node* op1 = nullptr, Node* op2 = nullptr, Node* op3 = nullptr)
+    {
+
+        this->kind = kind;
+        this->value = value;
+        this->op1 = op1;
+        this->op2 = op2;
+        this->op3 = op3;
+    }
+    // TODO: node is dynamic, need to create dynamic
+    ~Node();
+};
+
+class Parser {
+public:
+    Parser() {};
+    Parser(Lexer lexer)
+    {
+        _lexer = lexer;
+        _currentIndex = 0;
+    };
+    ~Parser() {};
+
+    Node CreateNode();
+
+    vector<Node> Parse(vector<TokenStruct> tokens);
+
+private:
+    Node* Statement();
+    Node* ParenExpr();
+    Node* Expr();
+    Node* Test();
+    Node* Summa();
+    Node* Term();
+    size_t _currentIndex;
+    Lexer _lexer;
+
+private:
+    void Error(const string& msg);
+};

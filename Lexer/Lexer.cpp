@@ -71,7 +71,7 @@ void Lexer::NextTok() const
     ++_CurrentTokIndex;
 }
 
-int const& Lexer::value() const
+int const& Lexer::Value() const
 {
     if (_CurrentTokIndex + 1 < _Tokens.size()) {
         return _Tokens[_CurrentTokIndex].value;
@@ -80,7 +80,7 @@ int const& Lexer::value() const
     return -1;
 }
 
-LexTypes const& Lexer::sym() const
+LexTypes const& Lexer::Sym() const
 {
     if (_CurrentTokIndex + 1 < _Tokens.size()) {
         return _Tokens[_CurrentTokIndex].type;

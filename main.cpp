@@ -35,11 +35,8 @@ int main(int argc, char** argv)
     inFile.close();
 
     Lexer lexer = Lexer(words);
-
-    //vector<TokenStruct> tokens = Lexer::Tokenize(words);
-    //vector<Node> nodes = Parser::Parse(tokens);
-
-    //Parser parser = Parser();
+    // TODO: memory leak, need destructor
+    Node node = Parser(lexer).CreateNode();
 
     return 0;
 }

@@ -58,9 +58,10 @@ private:
     vector<TokenStruct> _Tokens;
 
 public:
+    Lexer() {};
     Lexer(const std::vector<char>& words);
     ~Lexer() {};
     void NextTok() const;
-    int const& value() const;
-    LexTypes const& sym() const;
+    int const& Value() const;
+    LexTypes const& Sym() const;
 };
