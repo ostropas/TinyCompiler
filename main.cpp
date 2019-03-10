@@ -34,9 +34,12 @@ int main(int argc, char** argv)
 
     inFile.close();
 
-    vector<TokenStruct> tokens = Lexer::tokenize(words);
+    Lexer lexer = Lexer(words);
 
-    Parser parser = Parser();
+    //vector<TokenStruct> tokens = Lexer::Tokenize(words);
+    //vector<Node> nodes = Parser::Parse(tokens);
+
+    //Parser parser = Parser();
 
     return 0;
 }

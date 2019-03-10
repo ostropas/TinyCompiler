@@ -4,6 +4,8 @@
 #include <string>
 #include <vector>
 
+#undef EOF
+
 using namespace std;
 
 enum class LexTypes {
@@ -21,7 +23,8 @@ enum class LexTypes {
     MINUS,
     LESS,
     EQUAL,
-    SEMICOLON
+    SEMICOLON,
+    EOF
 };
 
 struct TokenStruct {
@@ -51,14 +54,13 @@ private:
     /// <param name="msg"></param>
     static void Error(const string& msg);
 
-public:
-    Lexer() {};
-    ~Lexer() {};
+    mutable size_t _CurrentTokIndex;
+    vector<TokenStruct> _Tokens;
 
-    /// <summary>
-    /// Create token from text
-    /// </summary>
-    /// <param name="words">input text</param>
-    /// <returns>tokens</returns>
-    static vector<TokenStruct> tokenize(const std::vector<char>& words);
+public:
+    Lexer(const std::vector<char>& words);
+    ~Lexer() {};
+    void NextTok() const;
+    int const& value() const;
+    LexTypes const& sym() const;
 };
