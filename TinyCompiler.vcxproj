@@ -154,10 +154,12 @@
     <ClCompile Include="Lexer\Lexer.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Parser\Parser.cpp" />
+    <ClCompile Include="VirtualMachine\VirtualMachine.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Lexer\Lexer.h" />
     <ClInclude Include="Parser\Parser.h" />
+    <ClInclude Include="VirtualMachine\VirtualMachine.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="test.txt" />

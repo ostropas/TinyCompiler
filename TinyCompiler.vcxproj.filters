@@ -25,6 +25,12 @@
     <Filter Include="Файлы заголовков\Parser">
       <UniqueIdentifier>{fe6356ef-3062-4805-a317-44c09028d53b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Файлы заголовков\VirtualMachine">
+      <UniqueIdentifier>{fa13cd10-753e-4a11-9fba-e3f20c7ab4a1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Исходные файлы\VirtualMachine">
+      <UniqueIdentifier>{fc795180-c065-4ec2-b9cd-bb4d20827021}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -36,6 +42,9 @@
     <ClCompile Include="Parser\Parser.cpp">
       <Filter>Исходные файлы\Parser</Filter>
     </ClCompile>
+    <ClCompile Include="VirtualMachine\VirtualMachine.cpp">
+      <Filter>Исходные файлы\VirtualMachine</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Lexer\Lexer.h">
@@ -43,6 +52,9 @@
     </ClInclude>
     <ClInclude Include="Parser\Parser.h">
       <Filter>Файлы заголовков\Parser</Filter>
+    </ClInclude>
+    <ClInclude Include="VirtualMachine\VirtualMachine.h">
+      <Filter>Файлы заголовков\VirtualMachine</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
