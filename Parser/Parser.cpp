@@ -1,32 +1,32 @@
 #include "Parser.h"
 
-Node* Parser::Term()
+shared_ptr<Node> Parser::Term()
 {
     if (_lexer.Sym() == LexTypes::ID) {
-        auto n = new Node(ParserKind::VAR, _lexer.Value());
+        auto n = make_shared<Node>(ParserKind::VAR, _lexer.Value());
         _lexer.NextTok();
-        return n;
+        return move(n);
     } else if (_lexer.Sym() == LexTypes::NUM) {
-        auto n = new Node(ParserKind::CONST, _lexer.Value());
+        auto n =  make_shared<Node>(ParserKind::CONST, _lexer.Value());
         _lexer.NextTok();
-        return n;
+        return move(n);
     } else {
         return ParenExpr();
     }
 }
 
-Node* Parser::Test()
+shared_ptr<Node> Parser::Test()
 {
     auto n = Summa();
     if (_lexer.Sym() == LexTypes::LESS) {
         _lexer.NextTok();
-        n = new Node(ParserKind::LT, 0, n, Summa());
+        n = make_shared<Node>(ParserKind::LT, 0, n, Summa());
     }
 
-    return n;
+    return move(n);
 }
 
-Node* Parser::Summa()
+shared_ptr<Node> Parser::Summa()
 {
     auto n = Term();
     while (_lexer.Sym() == LexTypes::PLUS || _lexer.Sym() == LexTypes::MINUS) {
@@ -36,13 +36,13 @@ Node* Parser::Summa()
             n->kind = ParserKind::SUB;
         }
         _lexer.NextTok();
-        n = new Node(n->kind, 0, n, Term());
+        n = make_shared<Node>(n->kind, 0, n, Term());
     }
 
-    return n;
+    return move(n);
 }
 
-Node* Parser::Expr()
+shared_ptr<Node> Parser::Expr()
 {
     if (_lexer.Sym() != LexTypes::ID) {
         return Test();
@@ -50,32 +50,32 @@ Node* Parser::Expr()
     auto n = Test();
     if (n->kind == ParserKind::VAR && _lexer.Sym() == LexTypes::EQUAL) {
         _lexer.NextTok();
-        n = new Node(ParserKind::SET, 0, n, Expr());
+        n = make_shared<Node>(ParserKind::SET, 0, n, Expr());
     }
 
-    return n;
+    return move(n);
 }
 
-Node* Parser::ParenExpr()
+shared_ptr<Node> Parser::ParenExpr()
 {
     if (_lexer.Sym() != LexTypes::LPAR) {
         Error("\"(\" expected");
     }
     _lexer.NextTok();
-    Node* n = Expr();
+    auto n = Expr();
     if (_lexer.Sym() != LexTypes::RPAR) {
         Error("\")\" expected");
     }
     _lexer.NextTok();
-    return n;
+    return move(n);
 }
 
-Node* Parser::Statement()
+shared_ptr<Node> Parser::Statement()
 {
-    Node* n;
+    shared_ptr<Node> n;
     switch (_lexer.Sym()) {
     case LexTypes::IF:
-        n = new Node(ParserKind::IF1);
+        n = make_unique<Node>(ParserKind::IF1);
         _lexer.NextTok();
         n->op1 = ParenExpr();
         n->op2 = Statement();
@@ -86,13 +86,13 @@ Node* Parser::Statement()
         }
         break;
     case LexTypes::WHILE:
-        n = new Node(ParserKind::WHILE);
+        n = make_unique<Node>(ParserKind::WHILE);
         _lexer.NextTok();
         n->op1 = ParenExpr();
         n->op2 = Statement();
         break;
     case LexTypes::DO:
-        n = new Node(ParserKind::DO);
+        n = make_unique<Node>(ParserKind::DO);
         _lexer.NextTok();
         n->op1 = Statement();
         if (_lexer.Sym() != LexTypes::WHILE) {
@@ -105,19 +105,19 @@ Node* Parser::Statement()
         }
         break;
     case LexTypes::SEMICOLON:
-        n = new Node(ParserKind::EMPTY);
+        n = make_unique<Node>(ParserKind::EMPTY);
         _lexer.NextTok();
         break;
     case LexTypes::LBRA:
-        n = new Node(ParserKind::EMPTY);
+        n = make_unique<Node>(ParserKind::EMPTY);
         _lexer.NextTok();
         while (_lexer.Sym() != LexTypes::RBRA) {
-            n = new Node(ParserKind::SEQ, 0, n, Statement());
+            n = make_unique<Node>(ParserKind::SEQ, 0, n, Statement());
         }
         _lexer.NextTok();
         break;
     default:
-        n = new Node(ParserKind::EXPR, 0, Expr());
+        n = make_unique<Node>(ParserKind::EXPR, 0, Expr());
         if (_lexer.Sym() != LexTypes::SEMICOLON) {
             Error("\";\" expected");
         }
@@ -125,7 +125,7 @@ Node* Parser::Statement()
         break;
     }
 
-    return n;
+    return move(n);
 }
 
 Node Parser::CreateNode()

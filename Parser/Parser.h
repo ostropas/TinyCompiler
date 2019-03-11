@@ -36,45 +36,43 @@ public:
     ParserKind kind;
     int value;
     // Next tree leafs
-    Node* op1;
-    Node* op2;
-    Node* op3;
+    shared_ptr<Node> op1;
+    shared_ptr<Node> op2;
+    shared_ptr<Node> op3;
 
-    Node() {};
-    Node(ParserKind kind, int value = NULL, Node* op1 = nullptr, Node* op2 = nullptr, Node* op3 = nullptr)
+    Node(){};
+    Node(ParserKind kind, int value = NULL, shared_ptr<Node> op1 = nullptr, shared_ptr<Node> op2 = nullptr, shared_ptr<Node> op3 = nullptr)
     {
 
         this->kind = kind;
         this->value = value;
-        this->op1 = op1;
-        this->op2 = op2;
-        this->op3 = op3;
+        this->op1 = move(op1);
+        this->op2 = move(op2);
+        this->op3 = move(op3);
     }
-    // TODO: node is dynamic, need to create dynamic
-    ~Node();
 };
 
 class Parser {
 public:
-    Parser() {};
+    Parser(){};
     Parser(Lexer lexer)
     {
         _lexer = lexer;
         _currentIndex = 0;
     };
-    ~Parser() {};
+    ~Parser(){};
 
     Node CreateNode();
 
-    vector<Node> Parse(vector<TokenStruct> tokens);
+    //vector<Node> Parse(vector<TokenStruct> tokens);
 
 private:
-    Node* Statement();
-    Node* ParenExpr();
-    Node* Expr();
-    Node* Test();
-    Node* Summa();
-    Node* Term();
+    shared_ptr<Node> Statement();
+    shared_ptr<Node> ParenExpr();
+    shared_ptr<Node> Expr();
+    shared_ptr<Node> Test();
+    shared_ptr<Node> Summa();
+    shared_ptr<Node> Term();
     size_t _currentIndex;
     Lexer _lexer;
 

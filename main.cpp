@@ -35,7 +35,6 @@ int main(int argc, char** argv)
     inFile.close();
 
     Lexer lexer = Lexer(words);
-    // TODO: memory leak, need destructor
     Node node = Parser(lexer).CreateNode();
 
     return 0;
