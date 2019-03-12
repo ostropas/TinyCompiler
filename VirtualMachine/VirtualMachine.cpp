@@ -51,6 +51,8 @@ void VirtualMachine::Run(vector<pair<VirtualMachineInstructions, int>> programm)
             } else {
                 stack[stack.back() - 2] = 0;
             }
+            stack.pop_back();
+            ++pc;
             continue;
         case VirtualMachineInstructions::JZ:
             if (stack[stack.back() - 1] == 0) {
