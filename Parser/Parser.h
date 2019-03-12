@@ -62,9 +62,7 @@ public:
     };
     ~Parser(){};
 
-    Node CreateNode();
-
-    //vector<Node> Parse(vector<TokenStruct> tokens);
+    shared_ptr<Node> CreateNode();
 
 private:
     shared_ptr<Node> Statement();

@@ -35,7 +35,7 @@ int main(int argc, char** argv)
     inFile.close();
 
     Lexer lexer = Lexer(words);
-    Node node = Parser(lexer).CreateNode();
+    shared_ptr<Node> node = Parser(lexer).CreateNode();
 
     return 0;
 }

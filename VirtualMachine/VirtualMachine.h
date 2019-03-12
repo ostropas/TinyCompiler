@@ -1,16 +1,14 @@
 #pragma once
 #include <array>
 #include <iostream>
-#include <map>
-#include <stack>
 #include <string>
-#include <tuple>
 #include <vector>
 
 using namespace std;
 
 enum class VirtualMachineInstructions {
-    IFETCH,
+    NONE = -1,
+	IFETCH,
     ISTORE,
     IPUSH,
     IPOP,
@@ -23,7 +21,9 @@ enum class VirtualMachineInstructions {
     HALT
 };
 
+typedef pair<VirtualMachineInstructions, int> Command;
+
 class VirtualMachine {
 public:
-    static void Run(vector<pair<VirtualMachineInstructions, int>> programm);
+    static void Run(vector<Command> programm);
 };

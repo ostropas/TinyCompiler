@@ -128,10 +128,10 @@ shared_ptr<Node> Parser::Statement()
     return move(n);
 }
 
-Node Parser::CreateNode()
+shared_ptr<Node> Parser::CreateNode()
 {
     // TODO: think about destructor
-    Node node = Node(ParserKind::PROG, 0, Statement());
+    auto node = make_unique<Node>(ParserKind::PROG, 0, Statement());
     if (_lexer.Sym() != LexTypes::EOF) {
         Error("Invalid statement syntax");
     }

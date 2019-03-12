@@ -31,6 +31,12 @@
     <Filter Include="Исходные файлы\VirtualMachine">
       <UniqueIdentifier>{fc795180-c065-4ec2-b9cd-bb4d20827021}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Исходные файлы\Compiler">
+      <UniqueIdentifier>{035bd54f-51e2-42fc-bb29-df7e675ed8c8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Файлы заголовков\Compiler">
+      <UniqueIdentifier>{e2e59a52-6b37-45c1-aaea-e8350041c14f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -45,6 +51,9 @@
     <ClCompile Include="VirtualMachine\VirtualMachine.cpp">
       <Filter>Исходные файлы\VirtualMachine</Filter>
     </ClCompile>
+    <ClCompile Include="Compiler\Compiler.cpp">
+      <Filter>Исходные файлы\Compiler</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Lexer\Lexer.h">
@@ -55,6 +64,9 @@
     </ClInclude>
     <ClInclude Include="VirtualMachine\VirtualMachine.h">
       <Filter>Файлы заголовков\VirtualMachine</Filter>
+    </ClInclude>
+    <ClInclude Include="Compiler\Compiler.h">
+      <Filter>Файлы заголовков\Compiler</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
