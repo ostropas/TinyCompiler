@@ -54,6 +54,9 @@
     <ClCompile Include="Compiler\Compiler.cpp">
       <Filter>Исходные файлы\Compiler</Filter>
     </ClCompile>
+    <ClCompile Include="CommandClass.cpp">
+      <Filter>Файлы заголовков</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Lexer\Lexer.h">

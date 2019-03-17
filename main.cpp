@@ -4,9 +4,9 @@
 #include <string>
 #include <vector>
 
+#include "Compiler/Compiler.h"
 #include "Lexer/Lexer.h"
 #include "Parser/Parser.h"
-#include "Compiler/Compiler.h"
 #include "VirtualMachine/VirtualMachine.h"
 
 using namespace std;
@@ -17,7 +17,6 @@ int main(int argc, char** argv)
         printf("No input file\n");
         return -1;
     }
-    // TODO: test
 
     ifstream inFile;
     inFile.open(argv[1]);
@@ -41,7 +40,7 @@ int main(int argc, char** argv)
     Compiler compiler = Compiler();
     auto programm = compiler.Ñompile(node);
 
-	VirtualMachine vm = VirtualMachine();
+    VirtualMachine vm = VirtualMachine();
     vm.Run(programm);
 
     return 0;

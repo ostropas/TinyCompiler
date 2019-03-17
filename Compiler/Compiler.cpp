@@ -12,73 +12,73 @@ vector<Command> Compiler::Ñompile(shared_ptr<Node> node)
 
     switch (node->kind) {
     case ParserKind::VAR:
-        Gen(make_pair(VirtualMachineInstructions::IFETCH, 0));
-        Gen(make_pair(VirtualMachineInstructions::NONE, node->value));
+        Gen(static_cast<Command>(Command(VirtualMachineInstructions::IFETCH)));
+        Gen(static_cast<Command>(Command(node->value)));
         break;
     case ParserKind::CONST:
-        Gen(make_pair(VirtualMachineInstructions::IPUSH, 0));
-        Gen(make_pair(VirtualMachineInstructions::NONE, node->value));
+        Gen(static_cast<Command>(Command(VirtualMachineInstructions::IPUSH)));
+        Gen(static_cast<Command>(Command(node->value)));
         break;
     case ParserKind::ADD:
         Ñompile(node->op1);
         Ñompile(node->op2);
-        Gen(make_pair(VirtualMachineInstructions::IADD, 0));
+        Gen(static_cast<Command>(Command(VirtualMachineInstructions::IADD)));
         break;
     case ParserKind::SUB:
         Ñompile(node->op1);
         Ñompile(node->op2);
-        Gen(make_pair(VirtualMachineInstructions::ISUB, 0));
+        Gen(static_cast<Command>(Command(VirtualMachineInstructions::ISUB)));
         break;
     case ParserKind::LT:
         Ñompile(node->op1);
         Ñompile(node->op2);
-        Gen(make_pair(VirtualMachineInstructions::ILT, 0));
+        Gen(static_cast<Command>(Command(VirtualMachineInstructions::ILT)));
         break;
     case ParserKind::SET:
         Ñompile(node->op2);
-        Gen(make_pair(VirtualMachineInstructions::ISTORE, 0));
-        Gen(make_pair(VirtualMachineInstructions::NONE, node->value));
+        Gen(static_cast<Command>(Command(VirtualMachineInstructions::ISTORE)));
+        Gen(static_cast<Command>(Command(node->op1->value)));
         break;
     case ParserKind::IF1:
         Ñompile(node->op1);
-        Gen(make_pair(VirtualMachineInstructions::JZ, 0));
+        Gen(static_cast<Command>(Command(VirtualMachineInstructions::JZ)));
         addr = _pc;
-        Gen(make_pair(VirtualMachineInstructions::NONE, 0));
+        Gen(static_cast<Command>(Command(0)));
         Ñompile(node->op2);
-        _programm[addr] = make_pair(VirtualMachineInstructions::NONE, _pc);
+        _programm[addr] = _pc;
         break;
     case ParserKind::IF2:
         Ñompile(node->op1);
-        Gen(make_pair(VirtualMachineInstructions::JZ, 0));
+        Gen(static_cast<Command>(Command(VirtualMachineInstructions::JZ)));
         addr1 = _pc;
-        Gen(make_pair(VirtualMachineInstructions::NONE, 0));
+        Gen(static_cast<Command>(Command(0)));
 
         Ñompile(node->op2);
-        Gen(make_pair(VirtualMachineInstructions::JMP, 0));
+        Gen(static_cast<Command>(Command(VirtualMachineInstructions::JMP)));
         addr2 = _pc;
-        Gen(make_pair(VirtualMachineInstructions::NONE, 0));
-        
-		_programm[addr1] = make_pair(VirtualMachineInstructions::NONE, _pc);
+        Gen(static_cast<Command>(Command(0)));
+
+        _programm[addr1] = Command(_pc);
         Ñompile(node->op3);
-        _programm[addr2] = make_pair(VirtualMachineInstructions::NONE, _pc);
+        _programm[addr2] = Command(_pc);
         break;
     case ParserKind::WHILE:
         addr1 = _pc;
         Ñompile(node->op1);
-        Gen(make_pair(VirtualMachineInstructions::JZ, 0));
+        Gen(static_cast<Command>(Command(VirtualMachineInstructions::JZ)));
         addr2 = _pc;
-        Gen(make_pair(VirtualMachineInstructions::NONE, 0));
+        Gen(static_cast<Command>(Command(0)));
         Ñompile(node->op2);
-        Gen(make_pair(VirtualMachineInstructions::JMP, 0));
-        Gen(make_pair(VirtualMachineInstructions::NONE, addr1));
-        _programm[addr2] = make_pair(VirtualMachineInstructions::NONE, _pc);
+        Gen(static_cast<Command>(Command(VirtualMachineInstructions::JMP)));
+        Gen(static_cast<Command>(Command(addr1)));
+        _programm[addr2] = Command(_pc);
         break;
     case ParserKind::DO:
         addr = _pc;
         Ñompile(node->op1);
         Ñompile(node->op2);
-        Gen(make_pair(VirtualMachineInstructions::JNZ, 0));
-        Gen(make_pair(VirtualMachineInstructions::NONE, addr));
+        Gen(static_cast<Command>(Command(VirtualMachineInstructions::JNZ)));
+        Gen(static_cast<Command>(Command(addr)));
         break;
     case ParserKind::SEQ:
         Ñompile(node->op1);
@@ -86,11 +86,11 @@ vector<Command> Compiler::Ñompile(shared_ptr<Node> node)
         break;
     case ParserKind::EXPR:
         Ñompile(node->op1);
-        Gen(make_pair(VirtualMachineInstructions::IPOP, 0));
+        Gen(static_cast<Command>(Command(VirtualMachineInstructions::IPOP)));
         break;
     case ParserKind::PROG:
         Ñompile(node->op1);
-        Gen(make_pair(VirtualMachineInstructions::HALT, 0));
+        Gen(static_cast<Command>(Command(VirtualMachineInstructions::HALT)));
         break;
     }
     return _programm;

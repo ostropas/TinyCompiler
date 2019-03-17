@@ -40,7 +40,7 @@ public:
     shared_ptr<Node> op2;
     shared_ptr<Node> op3;
 
-    Node(){};
+    Node() {};
     Node(ParserKind kind, int value = NULL, shared_ptr<Node> op1 = nullptr, shared_ptr<Node> op2 = nullptr, shared_ptr<Node> op3 = nullptr)
     {
 
@@ -54,13 +54,13 @@ public:
 
 class Parser {
 public:
-    Parser(){};
+    Parser() {};
     Parser(Lexer lexer)
     {
         _lexer = lexer;
         _currentIndex = 0;
     };
-    ~Parser(){};
+    ~Parser() {};
 
     shared_ptr<Node> CreateNode();
 

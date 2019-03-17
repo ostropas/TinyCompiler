@@ -7,7 +7,7 @@ shared_ptr<Node> Parser::Term()
         _lexer.NextTok();
         return move(n);
     } else if (_lexer.Sym() == LexTypes::NUM) {
-        auto n =  make_shared<Node>(ParserKind::CONST, _lexer.Value());
+        auto n = make_shared<Node>(ParserKind::CONST, _lexer.Value());
         _lexer.NextTok();
         return move(n);
     } else {
@@ -130,7 +130,6 @@ shared_ptr<Node> Parser::Statement()
 
 shared_ptr<Node> Parser::CreateNode()
 {
-    // TODO: think about destructor
     auto node = make_unique<Node>(ParserKind::PROG, 0, Statement());
     if (_lexer.Sym() != LexTypes::EOF) {
         Error("Invalid statement syntax");

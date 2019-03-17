@@ -71,7 +71,7 @@ void Lexer::NextTok() const
     ++_CurrentTokIndex;
 }
 
-int const& Lexer::Value() const
+int Lexer::Value() const
 {
     if (_CurrentTokIndex + 1 < _Tokens.size()) {
         return _Tokens[_CurrentTokIndex].value;

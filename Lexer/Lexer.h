@@ -62,6 +62,6 @@ public:
     Lexer(const std::vector<char>& words);
     ~Lexer() {};
     void NextTok() const;
-    int const& Value() const;
+    int Value() const;
     LexTypes const& Sym() const;
 };
