@@ -151,7 +151,6 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="CommandClass.cpp" />
     <ClCompile Include="Compiler\Compiler.cpp" />
     <ClCompile Include="Lexer\Lexer.cpp" />
     <ClCompile Include="main.cpp" />
@@ -160,8 +159,11 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Compiler\Compiler.h" />
+    <ClInclude Include="Compiler\Instructions.h" />
     <ClInclude Include="Lexer\Lexer.h" />
+    <ClInclude Include="Lexer\TokenStruct.h" />
     <ClInclude Include="Parser\Parser.h" />
+    <ClInclude Include="Parser\NodeStruct.h" />
     <ClInclude Include="VirtualMachine\VirtualMachine.h" />
   </ItemGroup>
   <ItemGroup>

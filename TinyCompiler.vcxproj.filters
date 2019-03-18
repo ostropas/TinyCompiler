@@ -54,9 +54,6 @@
     <ClCompile Include="Compiler\Compiler.cpp">
       <Filter>Исходные файлы\Compiler</Filter>
     </ClCompile>
-    <ClCompile Include="CommandClass.cpp">
-      <Filter>Файлы заголовков</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Lexer\Lexer.h">
@@ -70,6 +67,15 @@
     </ClInclude>
     <ClInclude Include="Compiler\Compiler.h">
       <Filter>Файлы заголовков\Compiler</Filter>
+    </ClInclude>
+    <ClInclude Include="Compiler\Instructions.h">
+      <Filter>Файлы заголовков\Compiler</Filter>
+    </ClInclude>
+    <ClInclude Include="Lexer\TokenStruct.h">
+      <Filter>Файлы заголовков\Lexer</Filter>
+    </ClInclude>
+    <ClInclude Include="Parser\NodeStruct.h">
+      <Filter>Файлы заголовков\Parser</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

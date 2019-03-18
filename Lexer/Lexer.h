@@ -4,38 +4,9 @@
 #include <string>
 #include <vector>
 
-#undef EOF
+#include "TokenStruct.h"
 
 using namespace std;
-
-enum class LexTypes {
-    NUM,
-    ID,
-    IF,
-    ELSE,
-    WHILE,
-    DO,
-    LBRA,
-    RBRA,
-    LPAR,
-    RPAR,
-    PLUS,
-    MINUS,
-    LESS,
-    EQUAL,
-    SEMICOLON,
-    EOF
-};
-
-struct TokenStruct {
-    LexTypes type;
-    int value;
-    TokenStruct(LexTypes type, int value)
-    {
-        this->type = type;
-        this->value = value;
-    }
-};
 
 class Lexer {
 private:

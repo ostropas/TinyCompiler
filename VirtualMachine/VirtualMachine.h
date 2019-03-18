@@ -1,9 +1,10 @@
 #pragma once
-#include "../Compiler/Compiler.h"
 #include <array>
 #include <iostream>
 #include <string>
 #include <vector>
+
+#include "../Compiler/Instructions.h"
 
 using namespace std;
 
