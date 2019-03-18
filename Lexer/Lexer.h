@@ -25,8 +25,8 @@ private:
     /// <param name="msg"></param>
     static void Error(const string& msg);
 
-    mutable size_t _CurrentTokIndex;
-    vector<TokenStruct> _Tokens;
+    mutable size_t _CurrentTokIndex = 0;
+    vector<TokenStruct> _Tokens = vector<TokenStruct>();
 
 public:
     Lexer() {};

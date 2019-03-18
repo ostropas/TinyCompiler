@@ -70,7 +70,7 @@ vector<Command> Compiler::Ñompile(shared_ptr<Node> node)
         Gen(static_cast<Command>(Command(0)));
         Ñompile(node->op2);
         Gen(static_cast<Command>(Command(VirtualMachineInstructions::JMP)));
-        Gen(static_cast<Command>(Command(addr1)));
+        Gen(static_cast<Command>(Command(static_cast<int>(addr1))));
         _programm[addr2] = Command(_pc);
         break;
     case ParserKind::DO:
@@ -78,7 +78,7 @@ vector<Command> Compiler::Ñompile(shared_ptr<Node> node)
         Ñompile(node->op1);
         Ñompile(node->op2);
         Gen(static_cast<Command>(Command(VirtualMachineInstructions::JNZ)));
-        Gen(static_cast<Command>(Command(addr)));
+        Gen(static_cast<Command>(Command(static_cast<int>(addr))));
         break;
     case ParserKind::SEQ:
         Ñompile(node->op1);

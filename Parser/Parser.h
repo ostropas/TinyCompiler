@@ -1,20 +1,19 @@
 #pragma once
 #include "../Lexer/Lexer.h"
+#include "NodeStruct.h"
 #include <functional>
 #include <iostream>
 #include <map>
 #include <string>
 #include <vector>
-#include "NodeStruct.h"
 
 using namespace std;
 
 class Parser {
 public:
-    Parser() {};
     Parser(Lexer lexer)
     {
-        _lexer = lexer;
+        _lexer = move(lexer);
         _currentIndex = 0;
     };
     ~Parser() {};

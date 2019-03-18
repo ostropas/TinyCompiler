@@ -75,16 +75,16 @@ int Lexer::Value() const
 {
     if (_CurrentTokIndex + 1 < _Tokens.size()) {
         return _Tokens[_CurrentTokIndex].value;
+    } else {
+        return _Tokens.back().value;
     }
-
-    return -1;
 }
 
 LexTypes const& Lexer::Sym() const
 {
     if (_CurrentTokIndex + 1 < _Tokens.size()) {
         return _Tokens[_CurrentTokIndex].type;
+    } else {
+        return _Tokens.back().type;
     }
-
-    return LexTypes::EOF;
 }
