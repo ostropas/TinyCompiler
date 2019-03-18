@@ -10,5 +10,5 @@ using namespace std;
 
 class VirtualMachine {
 public:
-    static void Run(vector<Command> programm);
+    static void run(vector<Command> programm);
 };

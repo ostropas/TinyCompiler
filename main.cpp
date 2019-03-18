@@ -36,12 +36,12 @@ int main(int argc, char** argv)
     inFile.close();
 
     Lexer lexer = Lexer(words);
-    shared_ptr<Node> node = Parser(lexer).CreateNode();
+    shared_ptr<Node> node = Parser(lexer).createNode();
     Compiler compiler = Compiler();
-    auto programm = compiler.Ñompile(node);
+    auto programm = compiler.compile(node);
 
     VirtualMachine vm = VirtualMachine();
-    vm.Run(programm);
+    vm.run(programm);
 
     return 0;
 }

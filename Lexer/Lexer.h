@@ -23,16 +23,16 @@ private:
     /// Print error
     /// </summary>
     /// <param name="msg"></param>
-    static void Error(const string& msg);
+    static void error(const string& msg);
 
-    mutable size_t _CurrentTokIndex = 0;
-    vector<TokenStruct> _Tokens = vector<TokenStruct>();
+    mutable size_t _currentTokIndex = 0;
+    vector<TokenStruct> _tokens = vector<TokenStruct>();
 
 public:
     Lexer() {};
     Lexer(const std::vector<char>& words);
     ~Lexer() {};
-    void NextTok() const;
-    int Value() const;
-    LexTypes const& Sym() const;
+    void nextTok() const;
+    int getValue() const;
+    LexTypes const& getSymbol() const;
 };

@@ -9,8 +9,8 @@ using namespace std;
 
 class Compiler {
 public:
-    void Gen(Command command);
-    vector<Command> Ñompile(shared_ptr<Node> node);
+    void gen(Command command);
+    vector<Command> compile(shared_ptr<Node> node);
 
 private:
     int _pc = 0;

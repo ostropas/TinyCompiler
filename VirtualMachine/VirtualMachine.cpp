@@ -1,6 +1,6 @@
 #include "VirtualMachine.h"
 
-void VirtualMachine::Run(vector<Command> programm)
+void VirtualMachine::run(vector<Command> programm)
 {
     array<int, 26> var = {};
     for (int i = 0; i < 26; i++) {

@@ -15,21 +15,21 @@ const map<string, LexTypes> Lexer::_WORDS = { { "if", LexTypes::IF },
     { "do", LexTypes::DO },
     { "while", LexTypes::WHILE } };
 
-void Lexer::Error(const string& msg)
+void Lexer::error(const string& msg)
 {
-    cout << msg << '\n';
+    cout << "Tokenize error: " << msg << '\n';
     exit(-1);
 }
 
 Lexer::Lexer(const std::vector<char>& words)
 {
     uint64_t index = 0;
-    _Tokens = vector<TokenStruct>();
+    _tokens = vector<TokenStruct>();
 
     while (index < words.size()) {
         char currentChar = words.at(index);
         if (_SYMBOLS.find(currentChar) != _SYMBOLS.end()) {
-            _Tokens.emplace_back(TokenStruct(_SYMBOLS.at(currentChar), -1));
+            _tokens.emplace_back(TokenStruct(_SYMBOLS.at(currentChar), -1));
             index++;
         } else if (isdigit(currentChar)) {
             int intVal = 0;
@@ -38,7 +38,7 @@ Lexer::Lexer(const std::vector<char>& words)
                 currentChar = words.at(++index);
             }
 
-            _Tokens.emplace_back(TokenStruct(LexTypes::NUM, intVal));
+            _tokens.emplace_back(TokenStruct(LexTypes::NUM, intVal));
         } else if (isalpha(currentChar)) {
             string ident = "";
             while (isalpha(currentChar)) {
@@ -51,40 +51,40 @@ Lexer::Lexer(const std::vector<char>& words)
             }
 
             if (_WORDS.find(ident) != _WORDS.end()) {
-                _Tokens.emplace_back(TokenStruct(_WORDS.at(ident), -1));
+                _tokens.emplace_back(TokenStruct(_WORDS.at(ident), -1));
             } else if (ident.size() == 1) {
-                _Tokens.emplace_back(TokenStruct(LexTypes::ID, static_cast<int>(ident.at(0) - 'a')));
+                _tokens.emplace_back(TokenStruct(LexTypes::ID, static_cast<int>(ident.at(0) - 'a')));
             } else {
-                Error("Unknown identifier: " + ident);
+                error("Unknown identifier: " + ident);
             }
         } else {
             index++;
         }
     }
 
-    _Tokens.emplace_back(TokenStruct(LexTypes::EOF, -1));
-    _CurrentTokIndex = 0;
+    _tokens.emplace_back(TokenStruct(LexTypes::EOF, -1));
+    _currentTokIndex = 0;
 }
 
-void Lexer::NextTok() const
+void Lexer::nextTok() const
 {
-    ++_CurrentTokIndex;
+    ++_currentTokIndex;
 }
 
-int Lexer::Value() const
+int Lexer::getValue() const
 {
-    if (_CurrentTokIndex + 1 < _Tokens.size()) {
-        return _Tokens[_CurrentTokIndex].value;
+    if (_currentTokIndex + 1 < _tokens.size()) {
+        return _tokens[_currentTokIndex].value;
     } else {
-        return _Tokens.back().value;
+        return _tokens.back().value;
     }
 }
 
-LexTypes const& Lexer::Sym() const
+LexTypes const& Lexer::getSymbol() const
 {
-    if (_CurrentTokIndex + 1 < _Tokens.size()) {
-        return _Tokens[_CurrentTokIndex].type;
+    if (_currentTokIndex + 1 < _tokens.size()) {
+        return _tokens[_currentTokIndex].type;
     } else {
-        return _Tokens.back().type;
+        return _tokens.back().type;
     }
 }
